@@ -1,11 +1,15 @@
 declare global {
   interface Window {
     dataLayer: unknown[];
-    gtag: (e: "event", action: string) => void;
+    gtag: (
+      e: "event",
+      action: string,
+      variant_name: Record<string, string>,
+    ) => void;
   }
 }
 
-type Payload = { plan_name: string };
+type Payload = { type: string };
 
 export const sendDataToGA = async (payload: Payload) => {
   try {
@@ -15,7 +19,7 @@ export const sendDataToGA = async (payload: Payload) => {
     }-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
     await fetch(
-      "https://script.google.com/macros/s/AKfycbyjHKaaXH6pHem-XBGcMsFOgokl_DgRk0ZzlHFgIUMUjbdR1QO9CDErK9t3oUzM4wU_/exec",
+      "https://script.google.com/macros/s/AKfycbwEMQbesoQt7GYmvegWy87LrJUGuWpmAddfaO9rHTRun9oB6jNgos9GlnfJnfJsbIsq/exec",
       {
         redirect: "follow",
         method: "POST",
